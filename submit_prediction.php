@@ -6,8 +6,8 @@ $prediction = $_POST['prediction'];
 
 // Connect to your database (example using Firebase Realtime Database)
 // Example of Firebase Realtime Database connection in PHP:
-$firebaseDbUrl = 'https://your-firebase-project.firebaseio.com/';
-$firebaseSecret = 'your_firebase_secret_key';
+$firebaseDbUrl = 'https://football-predictions-5427f-default-rtdb.europe-west1.firebasedatabase.app/';
+$firebaseSecret = 'TGpZ4nu75fNHPoU53eksEFARcwmkpN3Q00zjlEEP';
 $firebasePath = '/predictions.json';
 
 $data = json_encode([
