@@ -16,5 +16,28 @@
         <input type="text" id="prediction" name="prediction" required><br><br>
         <button type="submit">Submit Prediction</button>
     </form>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNAG2SU-3dNfn-kDpTuqmIdYmicYJ1OpU",
+    authDomain: "football-predictions-5427f.firebaseapp.com",
+    projectId: "football-predictions-5427f",
+    storageBucket: "football-predictions-5427f.appspot.com",
+    messagingSenderId: "930146857426",
+    appId: "1:930146857426:web:b2b9b49c84f51b4514180b",
+    measurementId: "G-22NDK50FVT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </body>
 </html>
