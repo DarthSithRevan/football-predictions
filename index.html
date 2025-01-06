@@ -3,41 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Predictions</title>
+    <title>Meal Planner SPA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+        .section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="submit_prediction.php" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <label for="prediction">Prediction:</label>
-        <input type="text" id="prediction" name="prediction" required><br><br>
-        <button type="submit">Submit Prediction</button>
-    </form>
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    <header>
+        <h1>Meal Planner</h1>
+    </header>
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBNAG2SU-3dNfn-kDpTuqmIdYmicYJ1OpU",
-    authDomain: "football-predictions-5427f.firebaseapp.com",
-    projectId: "football-predictions-5427f",
-    storageBucket: "football-predictions-5427f.appspot.com",
-    messagingSenderId: "930146857426",
-    appId: "1:930146857426:web:b2b9b49c84f51b4514180b",
-    measurementId: "G-22NDK50FVT"
-  };
+    <div class="section">
+        <h2>Create a Meal Plan</h2>
+        <form id="meal-plan-form">
+            <div class="form-group">
+                <label for="meal-section">Meal Section:</label>
+                <select id="meal-section">
+                    <option value="breakfast">Breakfast</option>
+                    <option value="mid-breakfast">Mid-Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="meal-name">Meal Name:</label>
+                <input type="text" id="meal-name" placeholder="Enter meal name">
+            </div>
+            <div class="form-group">
+                <label for="calories">Calories:</label>
+                <input type="number" id="calories" placeholder="Enter calorie count">
+            </div>
+            <div class="form-group">
+                <label for="macros">Macronutrients (Carbs/Proteins/Fats):</label>
+                <input type="text" id="macros" placeholder="e.g. 40/30/30">
+            </div>
+            <div class="form-group">
+                <label for="ingredients">Ingredients (comma separated):</label>
+                <input type="text" id="ingredients" placeholder="e.g. eggs, milk, oats">
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost of Ingredients ($):</label>
+                <input type="number" step="0.01" id="cost" placeholder="Enter cost">
+            </div>
+            <button type="button" onclick="addMeal()">Add Meal</button>
+        </form>
+    </div>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+    <div class="section">
+        <h2>Weekly Meal Plan</h2>
+        <table id="meal-plan-table">
+            <thead>
+                <tr>
+                    <th>Meal Section</th>
+                    <th>Meal Name</th>
+                    <th>Calories</th>
+                    <th>Macronutrients</th>
+                    <th>Ingredients</th>
+                    <th>Cost ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Meals will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const mealPlanTable = document.getElementById('meal-plan-table').querySelector('tbody');
+
+        function addMeal() {
+            const mealSection = document.getElementById('meal-section').value;
+            const mealName = document.getElementById('meal-name').value;
+            const calories = document.getElementById('calories').value;
+            const macros = document.getElementById('macros').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const cost = document.getElementById('cost').value;
+
+            if (!mealName || !calories || !macros || !ingredients || !cost) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${mealSection}</td>
+                <td>${mealName}</td>
+                <td>${calories}</td>
+                <td>${macros}</td>
+                <td>${ingredients}</td>
+                <td>${cost}</td>
+            `;
+
+            mealPlanTable.appendChild(newRow);
+
+            document.getElementById('meal-plan-form').reset();
+        }
+    </script>
 </body>
 </html>
